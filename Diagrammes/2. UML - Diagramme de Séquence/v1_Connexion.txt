@@ -1,0 +1,22 @@
+@startuml
+
+title "Connexion"
+
+actor User
+participant AP as "AppPortable"
+participant MA as "MainApp"
+
+User ->> AP : allumer BT
+activate AP
+User ->> MA : allumer BT
+activate MA
+User ->> MA : connection au portable
+AP <<- MA : connect()
+User -> AP : confirmation
+AP ->> MA : confirmConnection()
+deactivate MA
+deactivate AP
+
+
+
+@enduml

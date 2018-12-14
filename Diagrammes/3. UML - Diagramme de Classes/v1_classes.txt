@@ -1,0 +1,51 @@
+@startuml
+
+title Classes - Class Diagram
+
+package "Système Portable" {
+    class MainPortable
+    class ControleurAcceleromètre
+    class PhoneWindowController
+}
+
+package "Système Principal" {
+    class MainPrincipal
+    class MainWindowController
+    class Window
+}
+
+Window <|- MainPrincipal
+MainPrincipal --* MainWindowController
+
+class MainPrincipal{
+    - KinectSensor : sensor
+    - view : MainWindowController
+    - faireSonTruc(Type dataKinect, Type2 dataPhone) : void
+}
+    
+class MainWindowController{
+    - buttonConnect()
+}
+
+MainPortable --* ControleurAcceleromètre
+MainPortable --* PhoneWindowController
+
+class MainPortable {
+    - controleurAcceleromètre : ControleurAcceleromètre
+    - view : PhoneWindowController
+}
+
+class ControleurAcceleromètre{
+    - getData() : Type2
+}
+
+class PhoneWindowController{
+    - buttonConnect()
+    - buttonRun()
+    - buttonStop()
+    - buttonDisconnect()
+}
+
+note "il faut rajouter les méthodes\n(et classes) associées à\nl'envoie des messages" as N1
+
+@enduml

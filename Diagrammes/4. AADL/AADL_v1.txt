@@ -1,0 +1,48 @@
+package mi12package
+public
+	
+	system detecteurAmbiance
+	end detecteurAmbiance;
+
+	system MainSystem
+	end MainSystem;
+	
+	system PortableSystem
+	end PortableSystem;
+	
+	device Kinect
+	end Kinect;
+	
+	device BluetoothPC
+	end BluetoothPC;
+	
+	device BluetoothPortable
+	end BluetoothPortable;
+	
+	processor ProcessorPC
+	end ProcessorPC;
+	
+	
+	system implementation detecteurAmbiance.dAmbiance_impl
+		subcomponents
+			this_main_system: system MainSystem;
+			this_portable_system : system PortableSystem;
+	end detecteurAmbiance.dAmbiance_impl;
+	
+	system implementation MainSystem.main_devices
+		subcomponents
+			this_kinect: device Kinect;
+			this_main_bluetooth: device BluetoothPC;
+			this_main_processor: processor ProcessorPC;
+			this_main_memory: memory;
+			this_peripheric_bus: bus;
+	end MainSystem.main_devices;
+
+	system implementation PortableSystem.portable_devices
+		subcomponents
+			this_portable_processor: processor;
+			this_portable_bluetooth: device BluetoothPortable;
+		
+	end PortableSystem.portable_devices;
+	
+	end mi12package;

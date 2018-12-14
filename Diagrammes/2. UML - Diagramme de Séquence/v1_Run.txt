@@ -1,0 +1,38 @@
+@startuml
+
+title "Run"
+
+actor User
+entity AC as "Acceleromètre"
+participant AP as "AppPortable"
+participant MA as "MainApp"
+entity KI as "Kinect"
+
+User ->> AP : Run
+activate AP
+AP ->> MA : Run()
+deactivate AP
+activate MA
+MA -> KI : Init()
+activate KI
+MA <<-- KI : void
+deactivate KI
+loop while !Disconnect
+MA -> KI : getData()
+activate KI
+MA <<-- KI : return (type data)
+deactivate KI
+AP <<- MA : getData()
+activate AP
+AC <- AP : getData()
+activate AC
+AC --> AP : return(type2 data)
+deactivate AC
+AP ->> MA : sendData(type2 data)
+deactivate AP
+MA -> MA : faireSonTruc(type dataKinect, type2 dataPhone)
+end
+deactivate
+
+
+@enduml

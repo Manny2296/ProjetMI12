@@ -1,0 +1,30 @@
+@startuml
+
+title Use Case Diagram 
+left to right direction
+
+actor User
+
+rectangle AppPortable {
+    (Connect) as UC1
+    (Disconnect) as UC3
+    (Run) as UC5
+    (Get Data) as UC7
+}
+
+rectangle MainApp {
+    (Connect) as UC2
+    (Disconnect) as UC4
+    (Run) as UC6
+    (Get Data) as UC8
+}
+
+User -> UC1
+UC1 <.. UC3 : <<extends>>
+UC1 <.. UC5 : <<extends>>
+UC1 ..> UC2 : <<includes>>
+UC3 ..> UC4 : <<includes>>
+UC5 ..> UC6 : <<includes>>
+UC6 ..> UC7 : <<includes>>
+
+@enduml
