@@ -1,0 +1,17 @@
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\bin\x86\Debug\MI12-Desktopapp.exe.config
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\bin\x86\Debug\MI12-Desktopapp.exe
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\bin\x86\Debug\MI12-Desktopapp.pdb
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\bin\x86\Debug\Microsoft.Kinect.dll
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.csprojResolveAssemblyReference.cache
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\App.g.cs
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp_MarkupCompile.cache
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp_MarkupCompile.lref
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MainWindow.baml
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.g.resources
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12_Desktopapp.Properties.Resources.resources
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.csproj.GenerateResource.cache
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.csproj.CoreCompileInputs.cache
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.csproj.CopyComplete
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.exe
+C:\Users\Alfonso\source\repos\MI12-Desktopapp\MI12-Desktopapp\obj\x86\Debug\MI12-Desktopapp.pdb
