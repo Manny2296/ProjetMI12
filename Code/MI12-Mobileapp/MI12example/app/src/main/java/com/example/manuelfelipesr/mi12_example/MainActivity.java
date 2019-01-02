@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,8 +30,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float curX = 0, curY = 0, curZ = 0;
     Button btn_on,btn_off,btn_getdevices,btn_listdevices;
     private BluetoothAdapter BA;
+    private ArrayAdapter<String> mBTArrayAdapter;
     private Set<BluetoothDevice>pairedDevices;
     ListView lv;
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public void on(View v){
         if (!BA.isEnabled()) {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -57,13 +60,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         pairedDevices = BA.getBondedDevices();
 
         ArrayList list = new ArrayList();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);;
+        Toast.makeText(getApplicationContext(), "Showing Paired Devices" ,Toast.LENGTH_SHORT).show();
+        for(BluetoothDevice bt : pairedDevices) {
+        list.add(bt.getName());
 
-        for(BluetoothDevice bt : pairedDevices) list.add(bt.getName());
-        Toast.makeText(getApplicationContext(), "Showing Paired Devices",Toast.LENGTH_SHORT).show();
 
-        final ArrayAdapter adapter = new  ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-
+        }
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        lv = (ListView) findViewById(R.id.listview1);
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+               Intent intent = new Intent(getApplicationContext(),ConectActivity.class);
+                //String message = "abc";
+               //intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         btn_off=(Button)findViewById(R.id.button2);
         btn_getdevices=(Button)findViewById(R.id.button3);
         btn_listdevices=(Button)findViewById(R.id.button4);
-
+        mBTArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         BA = BluetoothAdapter.getDefaultAdapter();
-        lv = (ListView)findViewById(R.id.listview1);
+        //lv = (ListView)findViewById(R.id.listview1);
     }
 
     @Override
