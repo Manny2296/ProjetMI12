@@ -15,37 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="46dp" />
 
-        <TextView
-            android:id="@+id/txtAccX"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:autoText="false"
-            android:gravity="center"
-            android:text="Valor de X"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:autoSizeTextType="none" />
-
-        <TextView
-            android:id="@+id/txtAccY"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Valor de Y"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtAccZ"
-            style="@android:style/Widget.DeviceDefault.Light.TextView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Valor de Z"
-            android:textAllCaps="false"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

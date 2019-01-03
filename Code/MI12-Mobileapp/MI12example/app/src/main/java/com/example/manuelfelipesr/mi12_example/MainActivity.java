@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,8 +23,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity extends AppCompatActivity  {
 
     private long last_update = 0, last_movement = 0;
     private float prevX = 0, prevY = 0, prevZ = 0;
@@ -32,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private BluetoothAdapter BA;
     private ArrayAdapter<String> mBTArrayAdapter;
     private Set<BluetoothDevice>pairedDevices;
+    BluetoothConnectionService mBluetoothConnection;
+    public ArrayList<BluetoothDevice> mBTDevices = new ArrayList<>();
+    private static final UUID MY_UUID_INSECURE =  UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
     ListView lv;
+    BluetoothDevice mBTDevice;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     public void on(View v){
         if (!BA.isEnabled()) {
@@ -64,9 +70,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Toast.makeText(getApplicationContext(), "Showing Paired Devices" ,Toast.LENGTH_SHORT).show();
         for(BluetoothDevice bt : pairedDevices) {
         list.add(bt.getName());
-
+        mBTDevices.add(bt);
 
         }
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         lv = (ListView) findViewById(R.id.listview1);
         lv.setAdapter(adapter);
@@ -75,9 +82,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-               Intent intent = new Intent(getApplicationContext(),ConectActivity.class);
+
+                String deviceName = mBTDevices.get(position).getName();
+                Toast.makeText(getApplicationContext(), deviceName + "Conecting ...", Toast.LENGTH_LONG).show();
+
+                mBTDevice = mBTDevices.get(position);
+
+                Intent intent = new Intent(getApplicationContext(),ConectActivity.class);
                 //String message = "abc";
-               //intent.putExtra(EXTRA_MESSAGE, message);
+               intent.putExtra("mBTDevice",mBTDevice);
+              // intent.putExtra("disp",mBTDevice.getName());
+             //   mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
+              // mBluetoothConnection.startClient(mBTDevice,MY_UUID_INSECURE);
                 startActivity(intent);
             }
         });
@@ -95,71 +111,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //lv = (ListView)findViewById(R.id.listview1);
     }
 
-    @Override
-    protected void onStop() {
-        SensorManager sm = (SensorManager) getSystemService(SENSOR_SERVICE);
-        sm.unregisterListener(this);
-        super.onStop();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SensorManager sm = (SensorManager) getSystemService(SENSOR_SERVICE);
-        List<Sensor> sensors = sm.getSensorList(Sensor.TYPE_ACCELEROMETER);
-        if (sensors.size() > 0) {
-            sm.registerListener(this, sensors.get(0), SensorManager.SENSOR_DELAY_GAME);
-        }
-    }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        synchronized (this) {
-            long current_time = event.timestamp;
-
-            curX = event.values[0];
-            curY = event.values[1];
-            curZ = event.values[2];
-            if (prevX == 0 && prevY == 0 && prevZ == 0) {
-                last_update = current_time;
-                last_movement = current_time;
-                prevX = curX;
-                prevY = curY;
-                prevZ = curZ;
-            }
-            long time_difference = current_time - last_update;
-            if (time_difference > 0) {
-                float movement = Math.abs((curX + curY + curZ) - (prevX - prevY - prevZ)) / time_difference;
-                int limit = 1500;
-                float min_movement = 1E-6f;
-                if (movement > min_movement) {
-                    if (current_time - last_movement >= limit) {
-                        //Toast.makeText(getApplicationContext(), "Hay movimiento de " + movement, Toast.LENGTH_SHORT).show();
-                    }
-                    last_movement = current_time;
-                }
-                prevX = curX;
-                prevY = curY;
-                prevZ = curZ;
-                last_update = current_time;
-            }
 
 
-            ((TextView) findViewById(R.id.txtAccX)).setText("Acelerómetro X: " + curX);
-            ((TextView) findViewById(R.id.txtAccY)).setText("Acelerómetro Y: " + curY);
-            ((TextView) findViewById(R.id.txtAccZ)).setText("Acelerómetro Z: " + curZ);
-        }
-    }
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
 }
